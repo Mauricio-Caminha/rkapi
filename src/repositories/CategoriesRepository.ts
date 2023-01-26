@@ -1,4 +1,5 @@
 import { Category } from "../models/Category";
+
 // DTO => Data Transfer Object
 interface ICreateCategoryDTO {
     name: string;
@@ -6,7 +7,7 @@ interface ICreateCategoryDTO {
 }
 
 class CategoriesRepository {
-    public categories: Category[];
+    private categories: Category[];
 
     constructor() {
         this.categories = [];
@@ -22,6 +23,16 @@ class CategoriesRepository {
         });
 
         this.categories.push(category);
+    };
+
+    list(): Category[] {
+        return this.categories;
+    };
+
+    findByName(name: string): Category {
+        const categoryAlreadyExists = this.categories.find(category => category.name === name);
+        
+        return categoryAlreadyExists;
     }
 }
 

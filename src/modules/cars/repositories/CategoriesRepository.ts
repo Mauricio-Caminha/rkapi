@@ -1,16 +1,26 @@
 import { Category } from "../models/Category";
+import { ICategoriesRepository, ICreateCategoryDTO } from "./ICategoriesRepository";
+
+// Singleton -> Cria UMA instância GLOBAL -> não se usa para tudo
+
 
 // DTO => Data Transfer Object
-interface ICreateCategoryDTO {
-    name: string;
-    description: string;
-}
-
-class CategoriesRepository {
+class CategoriesRepository implements ICategoriesRepository {
     private categories: Category[];
 
-    constructor() {
+    private static INSTANCE: CategoriesRepository;
+
+    private constructor() {
         this.categories = [];
+    }
+
+    public static getInstance(): CategoriesRepository {
+        
+        if (!CategoriesRepository.INSTANCE) {
+            CategoriesRepository.INSTANCE = new CategoriesRepository();
+        }
+
+        return CategoriesRepository.INSTANCE;
     }
 
     create({ name, description }: ICreateCategoryDTO): void {

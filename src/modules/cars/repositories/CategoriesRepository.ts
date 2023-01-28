@@ -1,9 +1,7 @@
 import { Category } from "../models/Category";
-import { ICategoriesRepository, ICreateCategoryDTO } from "./ICategoriesRepository";
+import { ICategoriesRepository, ICreateCategoryDTO } from "./implementations/ICategoriesRepository";
 
 // Singleton -> Cria UMA instância GLOBAL -> não se usa para tudo
-
-
 // DTO => Data Transfer Object
 class CategoriesRepository implements ICategoriesRepository {
     private categories: Category[];
